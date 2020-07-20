@@ -1,0 +1,53 @@
+//
+//  ROG_HID_Driver.iig
+//  ROG-HID-Driver
+//
+//  Created by Nick on 7/20/20.
+//  Copyright © 2020 Nick. All rights reserved.
+//
+
+#ifndef ROG_HID_Driver_h
+#define ROG_HID_Driver_h
+
+#define KBD_FEATURE_REPORT_ID 0x5a
+#define KBD_FEATURE_REPORT_SIZE 16
+
+#include <HIDDriverKit/IOUserHIDEventDriver.iig>
+
+typedef enum {
+    luxUp,
+    luxDown,
+} kLuxEvent;
+
+class ROG_HID_Driver: public IOUserHIDEventDriver
+{
+public:
+    virtual bool init() override;
+    virtual kern_return_t Start(IOService * provider) override;
+    virtual kern_return_t Stop(IOService * provider) override;
+    virtual void free() override;
+    virtual void handleReport(uint64_t              timestamp,
+                              uint8_t               *report,
+                              uint32_t              reportLength,
+                              IOHIDReportType       type,
+                              uint32_t              reportID) override;
+    virtual void handleKeyboardReport(uint64_t      timestamp,
+                                      uint32_t      reportID) override;
+    virtual kern_return_t dispatchKeyboardEvent(uint64_t timeStamp,
+                                                uint32_t usagePage,
+                                                uint32_t usage,
+                                                uint32_t value,
+                                                IOOptionBits options,
+                                                bool repeat) override;
+    
+private:
+    virtual void parseKeyboardElementsHook(OSArray* elements);
+    virtual void setKbdLux(kLuxEvent luxEvent);
+    
+    // Ported from hid-asus.c
+    virtual void asusKbdInit();
+    virtual void asusKbdBacklightSet(uint8_t val);
+
+};
+
+#endif /* ROG_HID_Driver_h */

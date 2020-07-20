@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01056BCC24C613BA0087FD10 /* HIDDriverKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01056BCB24C613BA0087FD10 /* HIDDriverKit.framework */; };
+		01056BCE24C614AE0087FD10 /* HIDUsageTables.h in Headers */ = {isa = PBXBuildFile; fileRef = 01056BCD24C614AE0087FD10 /* HIDUsageTables.h */; };
+		01056BD024C614FE0087FD10 /* IOBufferMemoryDescriptorUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 01056BCF24C614FE0087FD10 /* IOBufferMemoryDescriptorUtility.h */; };
+		0118C98A24C60E4500C1C663 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0118C98924C60E4500C1C663 /* AppDelegate.swift */; };
+		0118C98C24C60E4500C1C663 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0118C98B24C60E4500C1C663 /* ContentView.swift */; };
+		0118C98E24C60E4600C1C663 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0118C98D24C60E4600C1C663 /* Assets.xcassets */; };
+		0118C99124C60E4600C1C663 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0118C99024C60E4600C1C663 /* Preview Assets.xcassets */; };
+		0118C99424C60E4600C1C663 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0118C99224C60E4600C1C663 /* Main.storyboard */; };
+		0118C99E24C60EAA00C1C663 /* ExtensionManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0118C99D24C60EAA00C1C663 /* ExtensionManger.swift */; };
+		0118C9A724C6121500C1C663 /* DriverKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0118C9A624C6121500C1C663 /* DriverKit.framework */; };
+		0118C9AA24C6121500C1C663 /* ROG_HID_Driver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0118C9A924C6121500C1C663 /* ROG_HID_Driver.cpp */; };
+		0118C9AC24C6121500C1C663 /* ROG_HID_Driver.iig in Sources */ = {isa = PBXBuildFile; fileRef = 0118C9AB24C6121500C1C663 /* ROG_HID_Driver.iig */; };
+		0118C9B124C6121500C1C663 /* com.black-dragon74.ROG-HID-Driver.dext in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 0118C9A424C6121500C1C663 /* com.black-dragon74.ROG-HID-Driver.dext */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0118C9AF24C6121500C1C663 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0118C97E24C60E4500C1C663 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0118C9A324C6121500C1C663;
+			remoteInfo = "ROG-HID-Driver";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0118C9B524C6121600C1C663 /* Embed System Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(SYSTEM_EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+				0118C9B124C6121500C1C663 /* com.black-dragon74.ROG-HID-Driver.dext in Embed System Extensions */,
+			);
+			name = "Embed System Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		01056BCB24C613BA0087FD10 /* HIDDriverKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HIDDriverKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/DriverKit19.0.sdk/System/DriverKit/System/Library/Frameworks/HIDDriverKit.framework; sourceTree = DEVELOPER_DIR; };
+		01056BCD24C614AE0087FD10 /* HIDUsageTables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HIDUsageTables.h; sourceTree = "<group>"; };
+		01056BCF24C614FE0087FD10 /* IOBufferMemoryDescriptorUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOBufferMemoryDescriptorUtility.h; sourceTree = "<group>"; };
+		0118C98624C60E4500C1C663 /* ROG-HID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ROG-HID.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0118C98924C60E4500C1C663 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0118C98B24C60E4500C1C663 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0118C98D24C60E4600C1C663 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0118C99024C60E4600C1C663 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0118C99324C60E4600C1C663 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0118C99524C60E4600C1C663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0118C99624C60E4600C1C663 /* ROG_HID.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ROG_HID.entitlements; sourceTree = "<group>"; };
+		0118C99D24C60EAA00C1C663 /* ExtensionManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionManger.swift; sourceTree = "<group>"; };
+		0118C9A424C6121500C1C663 /* com.black-dragon74.ROG-HID-Driver.dext */ = {isa = PBXFileReference; explicitFileType = "wrapper.driver-extension"; includeInIndex = 0; path = "com.black-dragon74.ROG-HID-Driver.dext"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0118C9A624C6121500C1C663 /* DriverKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DriverKit.framework; path = System/Library/Frameworks/DriverKit.framework; sourceTree = SDKROOT; };
+		0118C9A924C6121500C1C663 /* ROG_HID_Driver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ROG_HID_Driver.cpp; sourceTree = "<group>"; };
+		0118C9AB24C6121500C1C663 /* ROG_HID_Driver.iig */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.iig; path = ROG_HID_Driver.iig; sourceTree = "<group>"; };
+		0118C9AD24C6121500C1C663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0118C9AE24C6121500C1C663 /* ROG_HID_Driver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ROG_HID_Driver.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0118C98324C60E4500C1C663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0118C9A124C6121500C1C663 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0118C9A724C6121500C1C663 /* DriverKit.framework in Frameworks */,
+				01056BCC24C613BA0087FD10 /* HIDDriverKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0118C97D24C60E4500C1C663 = {
+			isa = PBXGroup;
+			children = (
+				0118C98824C60E4500C1C663 /* ROG-HID */,
+				0118C9A824C6121500C1C663 /* ROG-HID-Driver */,
+				0118C9A524C6121500C1C663 /* Frameworks */,
+				0118C98724C60E4500C1C663 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0118C98724C60E4500C1C663 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0118C98624C60E4500C1C663 /* ROG-HID.app */,
+				0118C9A424C6121500C1C663 /* com.black-dragon74.ROG-HID-Driver.dext */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0118C98824C60E4500C1C663 /* ROG-HID */ = {
+			isa = PBXGroup;
+			children = (
+				0118C98924C60E4500C1C663 /* AppDelegate.swift */,
+				0118C98B24C60E4500C1C663 /* ContentView.swift */,
+				0118C98D24C60E4600C1C663 /* Assets.xcassets */,
+				0118C99224C60E4600C1C663 /* Main.storyboard */,
+				0118C99524C60E4600C1C663 /* Info.plist */,
+				0118C99624C60E4600C1C663 /* ROG_HID.entitlements */,
+				0118C98F24C60E4600C1C663 /* Preview Content */,
+				0118C99D24C60EAA00C1C663 /* ExtensionManger.swift */,
+			);
+			path = "ROG-HID";
+			sourceTree = "<group>";
+		};
+		0118C98F24C60E4600C1C663 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				0118C99024C60E4600C1C663 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0118C9A524C6121500C1C663 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01056BCB24C613BA0087FD10 /* HIDDriverKit.framework */,
+				0118C9A624C6121500C1C663 /* DriverKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0118C9A824C6121500C1C663 /* ROG-HID-Driver */ = {
+			isa = PBXGroup;
+			children = (
+				0118C9A924C6121500C1C663 /* ROG_HID_Driver.cpp */,
+				01056BCF24C614FE0087FD10 /* IOBufferMemoryDescriptorUtility.h */,
+				0118C9AB24C6121500C1C663 /* ROG_HID_Driver.iig */,
+				01056BCD24C614AE0087FD10 /* HIDUsageTables.h */,
+				0118C9AD24C6121500C1C663 /* Info.plist */,
+				0118C9AE24C6121500C1C663 /* ROG_HID_Driver.entitlements */,
+			);
+			path = "ROG-HID-Driver";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0118C99F24C6121500C1C663 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01056BCE24C614AE0087FD10 /* HIDUsageTables.h in Headers */,
+				01056BD024C614FE0087FD10 /* IOBufferMemoryDescriptorUtility.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0118C98524C60E4500C1C663 /* ROG-HID */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0118C99924C60E4600C1C663 /* Build configuration list for PBXNativeTarget "ROG-HID" */;
+			buildPhases = (
+				0118C98224C60E4500C1C663 /* Sources */,
+				0118C98324C60E4500C1C663 /* Frameworks */,
+				0118C98424C60E4500C1C663 /* Resources */,
+				0118C9B524C6121600C1C663 /* Embed System Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0118C9B024C6121500C1C663 /* PBXTargetDependency */,
+			);
+			name = "ROG-HID";
+			productName = "ROG-HID";
+			productReference = 0118C98624C60E4500C1C663 /* ROG-HID.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0118C9A324C6121500C1C663 /* ROG-HID-Driver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0118C9B224C6121600C1C663 /* Build configuration list for PBXNativeTarget "ROG-HID-Driver" */;
+			buildPhases = (
+				0118C99F24C6121500C1C663 /* Headers */,
+				0118C9A024C6121500C1C663 /* Sources */,
+				0118C9A124C6121500C1C663 /* Frameworks */,
+				0118C9A224C6121500C1C663 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ROG-HID-Driver";
+			productName = "ROG-HID-Driver";
+			productReference = 0118C9A424C6121500C1C663 /* com.black-dragon74.ROG-HID-Driver.dext */;
+			productType = "com.apple.product-type.driver-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0118C97E24C60E4500C1C663 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1160;
+				LastUpgradeCheck = 1160;
+				ORGANIZATIONNAME = Nick;
+				TargetAttributes = {
+					0118C98524C60E4500C1C663 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					0118C9A324C6121500C1C663 = {
+						CreatedOnToolsVersion = 11.6;
+					};
+				};
+			};
+			buildConfigurationList = 0118C98124C60E4500C1C663 /* Build configuration list for PBXProject "ROG-HID" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0118C97D24C60E4500C1C663;
+			productRefGroup = 0118C98724C60E4500C1C663 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0118C98524C60E4500C1C663 /* ROG-HID */,
+				0118C9A324C6121500C1C663 /* ROG-HID-Driver */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0118C98424C60E4500C1C663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0118C99424C60E4600C1C663 /* Main.storyboard in Resources */,
+				0118C99124C60E4600C1C663 /* Preview Assets.xcassets in Resources */,
+				0118C98E24C60E4600C1C663 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0118C9A224C6121500C1C663 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0118C98224C60E4500C1C663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0118C99E24C60EAA00C1C663 /* ExtensionManger.swift in Sources */,
+				0118C98C24C60E4500C1C663 /* ContentView.swift in Sources */,
+				0118C98A24C60E4500C1C663 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0118C9A024C6121500C1C663 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0118C9AC24C6121500C1C663 /* ROG_HID_Driver.iig in Sources */,
+				0118C9AA24C6121500C1C663 /* ROG_HID_Driver.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0118C9B024C6121500C1C663 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0118C9A324C6121500C1C663 /* ROG-HID-Driver */;
+			targetProxy = 0118C9AF24C6121500C1C663 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0118C99224C60E4600C1C663 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0118C99324C60E4600C1C663 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0118C99724C60E4600C1C663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0118C99824C60E4600C1C663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		0118C99A24C60E4600C1C663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"ROG-HID/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "ROG-HID/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.black-dragon74.ROG-HID";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0118C99B24C60E4600C1C663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"ROG-HID/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "ROG-HID/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.black-dragon74.ROG-HID";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		0118C9B324C6121600C1C663 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/System/DriverKit/System/Library/Frameworks",
+				);
+				INFOPLIST_FILE = "ROG-HID-Driver/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.black-dragon74.ROG-HID-Driver";
+				PRODUCT_NAME = "$(inherited)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = driverkit;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0118C9B424C6121600C1C663 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				DRIVERKIT_DEPLOYMENT_TARGET = 19.6;
+				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/System/DriverKit/System/Library/Frameworks",
+				);
+				INFOPLIST_FILE = "ROG-HID-Driver/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.black-dragon74.ROG-HID-Driver";
+				PRODUCT_NAME = "$(inherited)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = driverkit;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0118C98124C60E4500C1C663 /* Build configuration list for PBXProject "ROG-HID" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0118C99724C60E4600C1C663 /* Debug */,
+				0118C99824C60E4600C1C663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0118C99924C60E4600C1C663 /* Build configuration list for PBXNativeTarget "ROG-HID" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0118C99A24C60E4600C1C663 /* Debug */,
+				0118C99B24C60E4600C1C663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0118C9B224C6121600C1C663 /* Build configuration list for PBXNativeTarget "ROG-HID-Driver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0118C9B324C6121600C1C663 /* Debug */,
+				0118C9B424C6121600C1C663 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0118C97E24C60E4500C1C663 /* Project object */;
+}
