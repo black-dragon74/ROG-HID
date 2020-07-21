@@ -233,6 +233,10 @@ kern_return_t ROG_HID_Driver::dispatchKeyboardEvent(uint64_t timeStamp, uint32_t
         }
     }
     
+    // Fix erratic caps lock key
+    if (usage == kHIDUsage_KeyboardCapsLock)
+        IOSleep(80);
+    
     DBGLOG("Dispatch Event - usage: 0x%x, page: 0x%x, val: 0x%x", usage, usagePage, value);
     return super::dispatchKeyboardEvent(timeStamp, usagePage, usage, value, options, repeat);
 }
