@@ -42,6 +42,8 @@ bool ROG_HID_Driver::init()
     if (ivars == nullptr)
         return false;
     
+    _current_lux = 3;
+    
     return true;
 }
 
@@ -74,6 +76,10 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
 
     // Now we init the keyboard
     asusKbdInit();
+    
+    // Reflect the intital value on lux
+    DBGLOG("Set initial kbd lux to 0x%x", _current_lux);
+    asusKbdBacklightSet(_current_lux);
 
     // And register ourselves with the system
     DBGLOG("Register service");
