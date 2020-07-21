@@ -12,6 +12,19 @@
 #define KBD_FEATURE_REPORT_ID 0x5a
 #define KBD_FEATURE_REPORT_SIZE 16
 
+#ifdef DEBUG
+
+#define DBGLOG(...)                                             \
+    do {                                                        \
+        os_log(OS_LOG_DEFAULT, LOG_PREFIX __VA_ARGS__);         \
+    } while (0)
+
+#else
+
+#define DBGLOG(...) do { } while (0)
+
+#endif
+
 #include <HIDDriverKit/IOUserHIDEventDriver.iig>
 
 typedef enum {

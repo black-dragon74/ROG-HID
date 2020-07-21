@@ -9,6 +9,8 @@
 #ifndef HIDUsageTables_h
 #define HIDUsageTables_h
 
+#pragma once
+
 /* Usage Pages */
 enum {
     kHIDPage_AppleVendorTopCase = 0x00ff,

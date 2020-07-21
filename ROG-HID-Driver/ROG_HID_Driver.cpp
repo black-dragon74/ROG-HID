@@ -32,7 +32,7 @@ struct ROG_HID_Driver_IVars
 
 bool ROG_HID_Driver::init()
 {
-    os_log(OS_LOG_DEFAULT, LOG_PREFIX "Init");
+    DBGLOG("Init");
     
     if (!super::init())
         return false;
@@ -47,7 +47,7 @@ bool ROG_HID_Driver::init()
 
 kern_return_t IMPL(ROG_HID_Driver, Start)
 {
-    os_log(OS_LOG_DEFAULT, LOG_PREFIX "Start");
+    DBGLOG("Start");
     kern_return_t ret;
     ret = Start(provider, SUPERDISPATCH);
     
@@ -73,11 +73,10 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     elements->release();
 
     // Now we init the keyboard
-    os_log(OS_LOG_DEFAULT, LOG_PREFIX "Init Asus Kbd");
     asusKbdInit();
 
     // And register ourselves with the system
-    os_log(OS_LOG_DEFAULT, LOG_PREFIX "Register service");
+    DBGLOG("Register service");
     RegisterService();
     
     return ret;
@@ -85,6 +84,7 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
 
 void IMPL(ROG_HID_Driver, parseKeyboardElementsHook)
 {
+    DBGLOG("Parse keyboard element hook called");
     _custom_keyboard_elements = OSArray::withCapacity(4);
     uint32_t count, index;
     for (index = 0, count = elements->getCount(); index < count; index++)
@@ -184,7 +184,7 @@ void ROG_HID_Driver::handleKeyboardReport(uint64_t timestamp, uint32_t reportID)
         if (value == preValue)
             continue;
         
-        os_log(OS_LOG_DEFAULT, LOG_PREFIX "Handle Report - usage: %X, page: %X, val: %X", usage, usagePage, value);
+        DBGLOG("Handle Key Report - usage: 0x%x, page: 0x%x, val: 0x%x", usage, usagePage, value);
         dispatchKeyboardEvent(timestamp, usagePage, usage, value, 0, true);
     }
     
@@ -227,6 +227,7 @@ kern_return_t ROG_HID_Driver::dispatchKeyboardEvent(uint64_t timeStamp, uint32_t
         }
     }
     
+    DBGLOG("Dispatch Event - usage: 0x%x, page: 0x%x, val: 0x%x", usage, usagePage, value);
     return super::dispatchKeyboardEvent(timeStamp, usagePage, usage, value, options, repeat);
 }
 
@@ -251,11 +252,13 @@ void IMPL(ROG_HID_Driver, setKbdLux)
 
 kern_return_t IMPL(ROG_HID_Driver, Stop)
 {
+    DBGLOG("Stop");
     return Stop(provider, SUPERDISPATCH);
 }
 
 void ROG_HID_Driver::free()
 {
+    DBGLOG("Free");
     if (ivars != nullptr)
     {
         OSSafeReleaseNULL(_hid_interface);
@@ -272,6 +275,7 @@ void ROG_HID_Driver::free()
 
 void IMPL(ROG_HID_Driver, asusKbdInit)
 {
+    DBGLOG("Sending keyboard init report");
     uint8_t buf[] = { KBD_FEATURE_REPORT_ID, 0x41, 0x53, 0x55, 0x53, 0x20, 0x54, 0x65, 0x63, 0x68, 0x2e, 0x49, 0x6e, 0x63, 0x2e, 0x00 };
     OSData* data = OSData::withBytes(buf, KBD_FEATURE_REPORT_SIZE);
     IOMemoryDescriptor* report = nullptr;
@@ -291,6 +295,7 @@ void IMPL(ROG_HID_Driver, asusKbdInit)
 
 void IMPL(ROG_HID_Driver, asusKbdBacklightSet)
 {
+    DBGLOG("Setting keyboard Lux to: %d", val);
     uint8_t buf[] = { KBD_FEATURE_REPORT_ID, 0xba, 0xc5, 0xc4, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
     buf[4] = val;
     OSData* data = OSData::withBytes(buf, KBD_FEATURE_REPORT_SIZE);
