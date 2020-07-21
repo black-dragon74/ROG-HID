@@ -4,7 +4,7 @@
 
 macOS HID driver based on DriverKit for Asus ROG notebook built-in keyboard.  Tested on 0b05:1869. Should support 0b05:1866, 0b05:1854, 0b05:1837, 0b05:1822.
 
-For enhanced functionality, use with [ROGSwitch](https://github/com/black-dragon74/https://github.com/black-dragon74/ROGSwitch).
+For enhanced functionality, use with [ROGSwitch](https://github.com/black-dragon74/ROGSwitch).
 
 ## Features
 - Supports setting display brightness using Fn Keys
