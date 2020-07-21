@@ -20,7 +20,7 @@
 	<string>1</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>DummyDriver</key>
+		<key>0b05_1822</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
@@ -34,10 +34,82 @@
 			<string>ROG_HID_Driver</string>
 			<key>IOUserServerName</key>
 			<string>com.black-dragon74.ROG-HID-Driver</string>
-			<key>PrimaryUsage</key>
-			<integer>16</integer>
-			<key>PrimaryUsagePage</key>
-			<integer>65417</integer>
+			<key>VendorID</key>
+			<integer>2821</integer>
+			<key>ProductID</key>
+			<integer>6178</integer>
+		</dict>
+		<key>0b05_1837</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>IOClass</key>
+			<string>AppleUserHIDEventService</string>
+			<key>IOKitDebug</key>
+			<integer>16384</integer>
+			<key>IOProviderClass</key>
+			<string>IOHIDInterface</string>
+			<key>IOUserClass</key>
+			<string>ROG_HID_Driver</string>
+			<key>IOUserServerName</key>
+			<string>com.black-dragon74.ROG-HID-Driver</string>
+			<key>VendorID</key>
+			<integer>2821</integer>
+			<key>ProductID</key>
+			<integer>6199</integer>
+		</dict>
+		<key>0b05_1854</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>IOClass</key>
+			<string>AppleUserHIDEventService</string>
+			<key>IOKitDebug</key>
+			<integer>16384</integer>
+			<key>IOProviderClass</key>
+			<string>IOHIDInterface</string>
+			<key>IOUserClass</key>
+			<string>ROG_HID_Driver</string>
+			<key>IOUserServerName</key>
+			<string>com.black-dragon74.ROG-HID-Driver</string>
+			<key>VendorID</key>
+			<integer>2821</integer>
+			<key>ProductID</key>
+			<integer>6228</integer>
+		</dict>
+		<key>0b05_1866</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>IOClass</key>
+			<string>AppleUserHIDEventService</string>
+			<key>IOKitDebug</key>
+			<integer>16384</integer>
+			<key>IOProviderClass</key>
+			<string>IOHIDInterface</string>
+			<key>IOUserClass</key>
+			<string>ROG_HID_Driver</string>
+			<key>IOUserServerName</key>
+			<string>com.black-dragon74.ROG-HID-Driver</string>
+			<key>VendorID</key>
+			<integer>2821</integer>
+			<key>ProductID</key>
+			<integer>6246</integer>
+		</dict>
+		<key>0b05_1869</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>IOClass</key>
+			<string>AppleUserHIDEventService</string>
+			<key>IOKitDebug</key>
+			<integer>16384</integer>
+			<key>IOProviderClass</key>
+			<string>IOHIDInterface</string>
+			<key>IOUserClass</key>
+			<string>ROG_HID_Driver</string>
+			<key>IOUserServerName</key>
+			<string>com.black-dragon74.ROG-HID-Driver</string>
 			<key>VendorID</key>
 			<integer>2821</integer>
 			<key>ProductID</key>

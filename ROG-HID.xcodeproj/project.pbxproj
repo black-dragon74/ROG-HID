@@ -65,6 +65,7 @@
 		0118C9AB24C6121500C1C663 /* ROG_HID_Driver.iig */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.iig; path = ROG_HID_Driver.iig; sourceTree = "<group>"; };
 		0118C9AD24C6121500C1C663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0118C9AE24C6121500C1C663 /* ROG_HID_Driver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ROG_HID_Driver.entitlements; sourceTree = "<group>"; };
+		0176196324C77846007D4278 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +93,7 @@
 			children = (
 				0118C98824C60E4500C1C663 /* ROG-HID */,
 				0118C9A824C6121500C1C663 /* ROG-HID-Driver */,
+				0176196324C77846007D4278 /* README.md */,
 				0118C9A524C6121500C1C663 /* Frameworks */,
 				0118C98724C60E4500C1C663 /* Products */,
 			);
