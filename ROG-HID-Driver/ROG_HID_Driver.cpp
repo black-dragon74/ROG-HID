@@ -17,18 +17,18 @@
 #undef super
 #define super IOUserHIDEventDriver
 
-#define LOG_PREFIX "ROG-HID - "
-
 struct ROG_HID_Driver_IVars
 {
     IOHIDInterface* hid_interface       { nullptr };
     OSArray* customKeyboardElements     { nullptr };
     uint8_t kbdLux                      { 3 };
+    uint8_t kbdFunction                 { 0 };
 };
 
 #define _hid_interface              ivars->hid_interface
 #define _custom_keyboard_elements   ivars->customKeyboardElements
 #define _current_lux                ivars->kbdLux
+#define _kbd_function               ivars->kbdFunction
 
 bool ROG_HID_Driver::init()
 {
@@ -55,14 +55,14 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     
     if (ret != kIOReturnSuccess)
     {
-        os_log(OS_LOG_DEFAULT, LOG_PREFIX "Start failed %d", ret);
+        OSLOG("Start failed %d", ret);
         return ret;
     }
     
     IOHIDInterface* interface = OSDynamicCast(IOHIDInterface, provider);
     if (!interface)
     {
-        os_log(OS_LOG_DEFAULT, LOG_PREFIX "Failure in casting provider to IOHIDInterface");
+        OSLOG("Failure in casting provider to IOHIDInterface");
         return kIOReturnError;
     }
     
@@ -77,8 +77,11 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     // Now we init the keyboard
     asusKbdInit();
     
+    // Read the keyboard functions
+    asusKbgGetFuctions();
+    
     // Reflect the intital value on lux
-    DBGLOG("Set initial kbd lux to 0x%x", _current_lux);
+    DBGLOG("Trying to set initial kbd lux to 0x%x", _current_lux);
     asusKbdBacklightSet(_current_lux);
 
     // And register ourselves with the system
@@ -292,7 +295,7 @@ void IMPL(ROG_HID_Driver, asusKbdInit)
     auto kr = IOBufferMemoryDescriptorUtility::createWithBytes(data->getBytesNoCopy(0, KBD_FEATURE_REPORT_SIZE), data->getLength(), &report);
     if (kr != kIOReturnSuccess)
     {
-        os_log(OS_LOG_DEFAULT, LOG_PREFIX "Error allocating memory for init report");
+        OSLOG("Error allocating memory for init report");
         report->release();
         data->release();
         return;
@@ -305,6 +308,11 @@ void IMPL(ROG_HID_Driver, asusKbdInit)
 
 void IMPL(ROG_HID_Driver, asusKbdBacklightSet)
 {
+    if (!(SUPPORT_KEYBOARD_BACKLIGHT & _kbd_function)) {
+        DBGLOG("Setting keyboard baclikght is not supported on this device");
+        return;
+    }
+    
     DBGLOG("Setting keyboard Lux to: %d", val);
     uint8_t buf[] = { KBD_FEATURE_REPORT_ID, 0xba, 0xc5, 0xc4, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
     buf[4] = val;
@@ -313,7 +321,7 @@ void IMPL(ROG_HID_Driver, asusKbdBacklightSet)
     auto ret = IOBufferMemoryDescriptorUtility::createWithBytes(data->getBytesNoCopy(0, KBD_FEATURE_REPORT_SIZE), data->getLength(), &report);
     if (ret != kIOReturnSuccess)
     {
-        os_log(OS_LOG_DEFAULT, LOG_PREFIX "Error allocating memory for backlightSet report");
+        OSLOG("Error allocating memory for backlightSet report");
         report->release();
         data->release();
         return;
@@ -322,4 +330,38 @@ void IMPL(ROG_HID_Driver, asusKbdBacklightSet)
 
     data->release();
     report->release();
+}
+
+void IMPL(ROG_HID_Driver, asusKbgGetFuctions)
+{
+    DBGLOG("Getting keyboard functions");
+    uint8_t buf[] = { KBD_FEATURE_REPORT_ID, 0x05, 0x20, 0x31, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+    OSData* data = OSData::withBytes(buf, KBD_FEATURE_REPORT_SIZE);
+    uint8_t readBuffer[KBD_FEATURE_REPORT_SIZE] {};
+    
+    IOMemoryDescriptor* report;
+    auto ret = IOBufferMemoryDescriptorUtility::createWithBytes(data->getBytesNoCopy(0, KBD_FEATURE_REPORT_SIZE), data->getLength(), &report);
+    
+    if (ret != kIOReturnSuccess) {
+        OSLOG("Error creating report for kbd feature");
+        goto exit;
+    }
+    
+    _hid_interface->SetReport(report, kIOHIDReportTypeFeature, KBD_FEATURE_REPORT_ID, 0);
+    _hid_interface->GetReport(report, kIOHIDReportTypeFeature, KBD_FEATURE_REPORT_ID, 0);
+    
+    ret = IOBufferMemoryDescriptorUtility::readBytes(readBuffer, KBD_FEATURE_REPORT_SIZE, &report);
+    
+    if (ret != kIOReturnSuccess) {
+        OSLOG("Error in reading feature report");
+        goto exit;
+    }
+    
+    _kbd_function = readBuffer[6];
+    DBGLOG("Keyboard feature report is %02x", _kbd_function);
+    
+exit:
+    report->release();
+    data->release();
+    return;
 }
