@@ -78,7 +78,7 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     asusKbdInit();
     
     // Read the keyboard functions
-    asusKbgGetFuctions();
+    asusKbdGetFunctions();
     
     // Reflect the intital value on lux
     DBGLOG("Trying to set initial kbd lux to 0x%x", _current_lux);
@@ -332,7 +332,7 @@ void IMPL(ROG_HID_Driver, asusKbdBacklightSet)
     report->release();
 }
 
-void IMPL(ROG_HID_Driver, asusKbgGetFuctions)
+void IMPL(ROG_HID_Driver, asusKbdGetFunctions)
 {
     DBGLOG("Getting keyboard functions");
     uint8_t buf[] = { KBD_FEATURE_REPORT_ID, 0x05, 0x20, 0x31, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };

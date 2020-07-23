@@ -68,7 +68,7 @@ private:
     // Ported from hid-asus.c
     virtual void asusKbdInit();
     virtual void asusKbdBacklightSet(uint8_t val);
-    virtual void asusKbgGetFuctions();
+    virtual void asusKbdGetFunctions();
 
 };
 
