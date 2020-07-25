@@ -318,7 +318,7 @@ void IMPL(ROG_HID_Driver, loadKbdLuxMonitor)
             int lastDispatchTimeMS = machTimeToMS(_last_dispatch_time);
             DBGLOG("Current time: %d, last key dispatch at: %d", currentTimeMS, lastDispatchTimeMS);
             
-            if (currentTimeMS - lastDispatchTimeMS >= LUX_FADE_OUT_DELAY && !_lux_is_faded_out)
+            if (currentTimeMS - lastDispatchTimeMS >= LUX_FADE_OUT_DELAY && !_lux_is_faded_out && _current_lux != 0)
             {
                 DBGLOG("Fading out the lux, inactivity timer reached");
                 fadeOutLux();
