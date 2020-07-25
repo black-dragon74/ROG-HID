@@ -10,8 +10,10 @@
 #define ROG_HID_Driver_h
 
 #define BIT(nr) (1UL << (nr))
+#define STOMS(x) (x * 1000)
 #define KBD_FEATURE_REPORT_ID 0x5a
 #define KBD_FEATURE_REPORT_SIZE 16
+#define LUX_FADE_OUT_DELAY STOMS(5 * 60)    /* 5 mins */
 #define SUPPORT_KEYBOARD_BACKLIGHT BIT(0)
 
 #define LOG_PREFIX "ROG-HID - "
@@ -24,7 +26,7 @@ do {                                                        \
 
 #define DBGLOG(...)                                             \
     do {                                                        \
-        os_log(OS_LOG_DEFAULT, LOG_PREFIX __VA_ARGS__);         \
+        OSLOG(__VA_ARGS__);                                     \
     } while (0)
 
 #else
@@ -64,6 +66,10 @@ public:
 private:
     virtual void parseKeyboardElementsHook(OSArray* elements);
     virtual void setKbdLux(kLuxEvent luxEvent);
+    virtual void loadKbdLuxMonitor();
+    virtual void fadeInLux();
+    virtual void fadeOutLux();
+    virtual int machTimeToMS(uint64_t machAbsoluteTime);
     
     // Ported from hid-asus.c
     virtual void asusKbdInit();

@@ -21,14 +21,20 @@ struct ROG_HID_Driver_IVars
 {
     IOHIDInterface* hid_interface       { nullptr };
     OSArray* customKeyboardElements     { nullptr };
+    IODispatchQueue* luxQueue           { nullptr };
     uint8_t kbdLux                      { 3 };
     uint8_t kbdFunction                 { 0 };
+    uint64_t lastEventDispatchTime      { 0 };
+    bool luxIsFadedOut                  { 0 };
 };
 
 #define _hid_interface              ivars->hid_interface
 #define _custom_keyboard_elements   ivars->customKeyboardElements
+#define _lux_queue                  ivars->luxQueue
 #define _current_lux                ivars->kbdLux
 #define _kbd_function               ivars->kbdFunction
+#define _last_dispatch_time         ivars->lastEventDispatchTime
+#define _lux_is_faded_out           ivars->luxIsFadedOut
 
 bool ROG_HID_Driver::init()
 {
@@ -43,6 +49,8 @@ bool ROG_HID_Driver::init()
         return false;
     
     _current_lux = 3;
+    _lux_is_faded_out = false;
+    _last_dispatch_time = mach_absolute_time();
     
     return true;
 }
@@ -67,6 +75,13 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     }
     
     _hid_interface = interface;
+    
+    ret = IODispatchQueue::Create("lux_dispatch_queue", 0, 0, &_lux_queue);
+    if (ret != kIOReturnSuccess)
+    {
+        OSLOG("Failed to create lux dispatch queue");
+        return kIOReturnError;
+    }
 
     OSArray *elements = _hid_interface->getElements();
     elements->retain();
@@ -87,6 +102,9 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     // And register ourselves with the system
     DBGLOG("Register service");
     RegisterService();
+    
+    // Load the keyboard backlight inactivity monitor
+    loadKbdLuxMonitor();
     
     return ret;
 }
@@ -203,6 +221,9 @@ void ROG_HID_Driver::handleKeyboardReport(uint64_t timestamp, uint32_t reportID)
 
 kern_return_t ROG_HID_Driver::dispatchKeyboardEvent(uint64_t timeStamp, uint32_t usagePage, uint32_t usage, uint32_t value, IOOptionBits options, bool repeat)
 {
+    if (_lux_is_faded_out)
+        fadeInLux();
+    
     if (usagePage == kHIDPage_AsusVendor)
     {
         switch (usage) {
@@ -240,6 +261,9 @@ kern_return_t ROG_HID_Driver::dispatchKeyboardEvent(uint64_t timeStamp, uint32_t
     if (usage == kHIDUsage_KeyboardCapsLock)
         IOSleep(80);
     
+    // Update the last dispatch time to the current mach_time
+    _last_dispatch_time = mach_absolute_time();
+    
     DBGLOG("Dispatch Event - usage: 0x%x, page: 0x%x, val: 0x%x", usage, usagePage, value);
     return super::dispatchKeyboardEvent(timeStamp, usagePage, usage, value, options, repeat);
 }
@@ -263,6 +287,48 @@ void IMPL(ROG_HID_Driver, setKbdLux)
     }
 }
 
+int IMPL(ROG_HID_Driver, machTimeToMS)
+{
+    const int64_t kOneMillion = 1000 * 1000;
+    mach_timebase_info_data_t s_timebase_info;
+
+    mach_timebase_info(&s_timebase_info);
+    return ((int)((machAbsoluteTime * s_timebase_info.numer) / (kOneMillion * s_timebase_info.denom)));
+}
+
+void IMPL(ROG_HID_Driver, fadeInLux)
+{
+    asusKbdBacklightSet(_current_lux);
+    _lux_is_faded_out = false;
+}
+
+void IMPL(ROG_HID_Driver, fadeOutLux)
+{
+    asusKbdBacklightSet(0);
+    _lux_is_faded_out = true;
+}
+
+void IMPL(ROG_HID_Driver, loadKbdLuxMonitor)
+{
+    // TODO: Figure out a better way to implement loadKbdLuxMonitor, async infinite loop is a dirty hack
+    DBGLOG("Init kbd lux monitor hook");
+    _lux_queue->DispatchAsync(^{
+        do {
+            int currentTimeMS = machTimeToMS(mach_absolute_time());
+            int lastDispatchTimeMS = machTimeToMS(_last_dispatch_time);
+            DBGLOG("Current time: %d, last key dispatch at: %d", currentTimeMS, lastDispatchTimeMS);
+            
+            if (currentTimeMS - lastDispatchTimeMS >= LUX_FADE_OUT_DELAY && !_lux_is_faded_out)
+            {
+                DBGLOG("Fading out the lux, inactivity timer reached");
+                fadeOutLux();
+            }
+            
+            IOSleep(STOMS(1));  /* Poll every second */
+        } while (true);
+    });
+}
+
 kern_return_t IMPL(ROG_HID_Driver, Stop)
 {
     DBGLOG("Stop");
@@ -276,6 +342,7 @@ void ROG_HID_Driver::free()
     {
         OSSafeReleaseNULL(_hid_interface);
         OSSafeReleaseNULL(_custom_keyboard_elements);
+        OSSafeReleaseNULL(_lux_queue);
     }
     
     IOSafeDeleteNULL(ivars, ROG_HID_Driver_IVars, 1);
