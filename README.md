@@ -10,6 +10,7 @@ For enhanced functionality, use with [ROGSwitch](https://github.com/black-dragon
 - Supports setting display brightness using Fn Keys
 - Supports setting keyboard backlight brightness using Fn Keys
 - Fixes erratic behavior of CAPS Lock key on keyboards with CAPS Lock LED.
+- Automatically turns off keyboard backlight after 5 minutes of inactivity
 
 Many features such as touchpad toggle, display off, sleep and airplane mode require use of IOKit. Currently, there is no documentation of interfacing DriverKit with IOKit. These features are on my TODO and will be implemented in a future release.
 
