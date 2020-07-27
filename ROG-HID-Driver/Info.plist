@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>IOKitPersonalities</key>
@@ -34,10 +34,10 @@
 			<string>ROG_HID_Driver</string>
 			<key>IOUserServerName</key>
 			<string>com.black-dragon74.ROG-HID-Driver</string>
-			<key>VendorID</key>
-			<integer>2821</integer>
 			<key>ProductID</key>
 			<integer>6178</integer>
+			<key>VendorID</key>
+			<integer>2821</integer>
 		</dict>
 		<key>0b05_1837</key>
 		<dict>
@@ -53,10 +53,10 @@
 			<string>ROG_HID_Driver</string>
 			<key>IOUserServerName</key>
 			<string>com.black-dragon74.ROG-HID-Driver</string>
-			<key>VendorID</key>
-			<integer>2821</integer>
 			<key>ProductID</key>
 			<integer>6199</integer>
+			<key>VendorID</key>
+			<integer>2821</integer>
 		</dict>
 		<key>0b05_1854</key>
 		<dict>
@@ -72,10 +72,10 @@
 			<string>ROG_HID_Driver</string>
 			<key>IOUserServerName</key>
 			<string>com.black-dragon74.ROG-HID-Driver</string>
-			<key>VendorID</key>
-			<integer>2821</integer>
 			<key>ProductID</key>
 			<integer>6228</integer>
+			<key>VendorID</key>
+			<integer>2821</integer>
 		</dict>
 		<key>0b05_1866</key>
 		<dict>
@@ -91,10 +91,10 @@
 			<string>ROG_HID_Driver</string>
 			<key>IOUserServerName</key>
 			<string>com.black-dragon74.ROG-HID-Driver</string>
-			<key>VendorID</key>
-			<integer>2821</integer>
 			<key>ProductID</key>
 			<integer>6246</integer>
+			<key>VendorID</key>
+			<integer>2821</integer>
 		</dict>
 		<key>0b05_1869</key>
 		<dict>
@@ -110,10 +110,10 @@
 			<string>ROG_HID_Driver</string>
 			<key>IOUserServerName</key>
 			<string>com.black-dragon74.ROG-HID-Driver</string>
-			<key>VendorID</key>
-			<integer>2821</integer>
 			<key>ProductID</key>
 			<integer>6249</integer>
+			<key>VendorID</key>
+			<integer>2821</integer>
 		</dict>
 	</dict>
 	<key>OSBundleUsageDescription</key>

@@ -435,6 +435,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.black-dragon74.ROG-HID";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -459,6 +460,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.black-dragon74.ROG-HID";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -480,6 +482,7 @@
 					"$(SDKROOT)/System/DriverKit/System/Library/Frameworks",
 				);
 				INFOPLIST_FILE = "ROG-HID-Driver/Info.plist";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.black-dragon74.ROG-HID-Driver";
 				PRODUCT_NAME = "$(inherited)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -503,6 +506,7 @@
 					"$(SDKROOT)/System/DriverKit/System/Library/Frameworks",
 				);
 				INFOPLIST_FILE = "ROG-HID-Driver/Info.plist";
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.black-dragon74.ROG-HID-Driver";
 				PRODUCT_NAME = "$(inherited)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
