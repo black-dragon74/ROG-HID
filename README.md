@@ -28,27 +28,27 @@ reenumerate -v 0x0b05,0x1869
 ```
 
 <details>
-    <summary>Build sign and install by yourself</summary>
+  <summary>Build sign and install by yourself</summary>
     
-    In order to build and use this driver, make sure your SIP is disabled and you have a free Apple developer account along with Xcode.
+  In order to build and use this driver, make sure your SIP is disabled and you have a free Apple developer account along with Xcode.
 
-    Then, you need to change the `codesign.sh` file to reflect your own developer identity. Follow the steps below to find and update your developer identity.
+  Then, you need to change the `codesign.sh` file to reflect your own developer identity. Follow the steps below to find and update your developer identity.
 
-    ```sh
-    # Find the code signing identity
-    security find-identity -p codesigning -v
-    ```
+  ```sh
+  # Find the code signing identity
+  security find-identity -p codesigning -v
+  ```
 
-    Copy the identity you get and then open the `codesign.sh` file. Replace the existing identity with the new one.
+  Copy the identity you get and then open the `codesign.sh` file. Replace the existing identity with the new one.
 
-    Now we need to enable DriverKit development mode. Run `systemextensionsctl developer on` in Terminal.
+  Now we need to enable DriverKit development mode. Run `systemextensionsctl developer on` in Terminal.
 
-    Now run the following commands in Terminal to build and install.
+  Now run the following commands in Terminal to build and install.
 
-    ```sh
-    make
-    make install
-    ```
+  ```sh
+  make
+  make install
+  ```
     
 </details>
 
