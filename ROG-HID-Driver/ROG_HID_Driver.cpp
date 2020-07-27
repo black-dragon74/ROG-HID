@@ -212,7 +212,8 @@ void ROG_HID_Driver::handleKeyboardReport(uint64_t timestamp, uint32_t reportID)
             continue;
         
         DBGLOG("Handle Key Report - usage: 0x%x, page: 0x%x, val: 0x%x", usage, usagePage, value);
-        dispatchKeyboardEvent(timestamp, usagePage, usage, value, 0, true);
+        dispatchKeyboardEvent(timestamp, usagePage, usage, value, 0, false);
+        return;
     }
     
     // Pass the rest of the reports to super for handling
