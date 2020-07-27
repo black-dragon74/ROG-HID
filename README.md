@@ -16,27 +16,8 @@ Many features such as touchpad toggle, display off, sleep and airplane mode requ
 
 ## Installing
 
-I do not have an apple developer certificate and hence the driver is unsigned, however there is a build available in the Releases for you to test. If it works, please let me know.
+Download the appropriate version from the [Releases](https://github.com/black-dragon74/ROG-HID/releases) and copy `ROG-HID.app` to `/Applications` folder.
 
-In order to use this driver, make sure your SIP is disabled and you have a free Apple developer account along with Xcode.
-
-Then, you need to change the `codesign.sh` file to reflect your own developer identity. Follow the steps below to find and update your developer identity.
-
-```sh
-# Find the code signing identity
-security find-identity -p codesigning -v
-```
-
-Copy the identity you get and then open the `codesign.sh` file. Replace the existing identity with the new one.
-
-Now we need to enable DriverKit development mode. Run `systemextensionsctl developer on` in Terminal.
-
-Now run the following commands in Terminal to build and install.
-
-```sh
-make
-make install
-```
 Now open the `ROG-HID.app` from Launchpad, click on `Activate ROG-HID Extension` and follow the instructions.
 
 The driver won't attach right away as DriverKit drivers do not attach to pre-enumerated devices. You can either reboot or use the `reenumerate` utility found inside Utils folder. To use this utlity, you need to know the VendorID and ProductID of your Keyboard. You can re-enumerate a USB device like:
@@ -45,6 +26,31 @@ The driver won't attach right away as DriverKit drivers do not attach to pre-enu
 #for vendor-id 0b05 and product-id 1869
 reenumerate -v 0x0b05,0x1869
 ```
+
+<details>
+    <summary>Build sign and install by yourself</summary>
+    
+    In order to build and use this driver, make sure your SIP is disabled and you have a free Apple developer account along with Xcode.
+
+    Then, you need to change the `codesign.sh` file to reflect your own developer identity. Follow the steps below to find and update your developer identity.
+
+    ```sh
+    # Find the code signing identity
+    security find-identity -p codesigning -v
+    ```
+
+    Copy the identity you get and then open the `codesign.sh` file. Replace the existing identity with the new one.
+
+    Now we need to enable DriverKit development mode. Run `systemextensionsctl developer on` in Terminal.
+
+    Now run the following commands in Terminal to build and install.
+
+    ```sh
+    make
+    make install
+    ```
+    
+</details>
 
 ## Building
 
