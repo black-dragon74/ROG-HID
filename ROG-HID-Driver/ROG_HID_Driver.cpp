@@ -19,14 +19,17 @@
 
 struct ROG_HID_Driver_IVars
 {
-    IOHIDInterface* hid_interface       { nullptr };
-    OSArray* customKeyboardElements     { nullptr };
-    IODispatchQueue* luxQueue           { nullptr };
-    uint8_t kbdLux                      { 3 };
-    uint8_t kbdFunction                 { 0 };
-    uint64_t lastEventDispatchTime      { 0 };
-    bool luxIsFadedOut                  { 0 };
+    IOHIDInterface* hid_interface           { nullptr };
+    OSArray* customKeyboardElements         { nullptr };
+    IODispatchQueue* luxQueue               { nullptr };
+    uint8_t kbdLux                          { 3 };
+    uint8_t kbdFunction                     { 0 };
+    static uint64_t lastEventDispatchTime;
+    bool luxIsFadedOut                      { 0 };
 };
+
+// Out of line initialization
+uint64_t ROG_HID_Driver_IVars::lastEventDispatchTime = 0;
 
 #define _hid_interface              ivars->hid_interface
 #define _custom_keyboard_elements   ivars->customKeyboardElements
@@ -50,7 +53,7 @@ bool ROG_HID_Driver::init()
     
     _current_lux = 3;
     _lux_is_faded_out = false;
-    _last_dispatch_time = mach_absolute_time();
+    _last_dispatch_time = 0;
     
     return true;
 }
@@ -82,6 +85,9 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
         OSLOG("Failed to create lux dispatch queue");
         return kIOReturnError;
     }
+    
+    // Load the keyboard backlight inactivity monitor
+    loadKbdLuxMonitor();
 
     OSArray *elements = _hid_interface->getElements();
     elements->retain();
@@ -102,9 +108,6 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     // And register ourselves with the system
     DBGLOG("Register service");
     RegisterService();
-    
-    // Load the keyboard backlight inactivity monitor
-    loadKbdLuxMonitor();
     
     return ret;
 }
@@ -312,7 +315,17 @@ void IMPL(ROG_HID_Driver, fadeOutLux)
 void IMPL(ROG_HID_Driver, loadKbdLuxMonitor)
 {
     // TODO: Figure out a better way to implement loadKbdLuxMonitor, async infinite loop is a dirty hack
-    DBGLOG("Init kbd lux monitor hook");
+    DBGLOG("Trying to load lux queue hook");
+    
+    // Don't dispatch another hook if one is already in place
+    if (_last_dispatch_time != 0) {
+        DBGLOG("A monitor is already running on lux queue");
+        return;
+    }
+    
+    // Otherwise, init the hook
+    DBGLOG("Lux queue initialized successfully");
+    _last_dispatch_time  = mach_absolute_time();
     _lux_queue->DispatchAsync(^{
         do {
             int currentTimeMS = machTimeToMS(mach_absolute_time());
