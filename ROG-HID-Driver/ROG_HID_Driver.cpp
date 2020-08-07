@@ -22,14 +22,16 @@ struct ROG_HID_Driver_IVars
     IOHIDInterface* hid_interface           { nullptr };
     OSArray* customKeyboardElements         { nullptr };
     IODispatchQueue* luxQueue               { nullptr };
-    uint8_t kbdLux                          { 3 };
     uint8_t kbdFunction                     { 0 };
     static uint64_t lastEventDispatchTime;
-    bool luxIsFadedOut                      { 0 };
+    static uint8_t kbdLux;
+    static bool luxIsFadedOut;
 };
 
 // Out of line initialization
 uint64_t ROG_HID_Driver_IVars::lastEventDispatchTime = 0;
+uint8_t ROG_HID_Driver_IVars::kbdLux = 3;
+bool ROG_HID_Driver_IVars::luxIsFadedOut = false;
 
 #define _hid_interface              ivars->hid_interface
 #define _custom_keyboard_elements   ivars->customKeyboardElements
@@ -51,8 +53,6 @@ bool ROG_HID_Driver::init()
     if (ivars == nullptr)
         return false;
     
-    _current_lux = 3;
-    _lux_is_faded_out = false;
     _last_dispatch_time = 0;
     
     return true;
@@ -338,6 +338,11 @@ void IMPL(ROG_HID_Driver, loadKbdLuxMonitor)
 
 void IMPL(ROG_HID_Driver, initLuxQueue)
 {
+    if (!(SUPPORT_KEYBOARD_BACKLIGHT & _kbd_function)) {
+        DBGLOG("Keyboard baclikght is not supported on this device, abort lux queue init");
+        return;
+    }
+    
     OSDictionary* deviceProps   { nullptr };
     OSObject* usagePageProp     { nullptr };
     OSNumber* kbdUsagePage      { nullptr };
