@@ -413,6 +413,9 @@ void IMPL(ROG_HID_Driver, parseInfoPlist)
     OSContainer* propContainer;
     
     SearchProperty("BacklightAutoTurnOff", "IOService", kIOServiceSearchPropertyParents, &propContainer);
+    if (!propContainer)
+        goto exit;
+    
     ivars->fixCapsLockLED = OSDynamicCast(OSNumber, propContainer)->unsigned8BitValue() == kBooleanTrue;
     DBGLOG("Fix caps lock led: %s", ivars->fixCapsLockLED ? "True" : "False");
 
