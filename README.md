@@ -46,7 +46,7 @@ reenumerate -v 0x0b05,0x1869
   Now run the following commands in Terminal to build and install.
 
   ```sh
-  make
+  make build
   make install
   ```
     
