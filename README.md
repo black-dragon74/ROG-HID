@@ -52,6 +52,17 @@ reenumerate -v 0x0b05,0x1869
     
 </details>
 
+## Configuring
+
+You can enable or disable additonal features and fixes in this driver by editing the Info.plist file of the dext. Currently configurable options are:
+
+Setting value to `0` disables and `1` enables the feature/fix.
+
+- `FixCapsLockLED` - Fixes erratic behavior of Caps Lock LED on some keyboards. If your LED didn't work under macOS without this driver. You should disable this feature.
+- `BacklightAutoTurnOff` - Automatically turns off the keyboard backlight after 5 mins of inactivity. Recommended to disable it on devices where there are multiple `IOHIDInterface` nubs for a single device, like `0b05:1866`.
+
+You need to edit ONLY the entry for your vendor and device id. Like for `0b05:1869` I would edit `0b05_1869` entry under `IOKitPersonalities` dict.
+
 ## Building
 
 ### From GitHub:

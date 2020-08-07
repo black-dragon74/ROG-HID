@@ -22,8 +22,12 @@
 	<dict>
 		<key>0b05_1822</key>
 		<dict>
+			<key>BacklightAutoTurnOff</key>
+			<integer>1</integer>
 			<key>CFBundleIdentifier</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>FixCapsLockLED</key>
+			<integer>1</integer>
 			<key>IOClass</key>
 			<string>AppleUserHIDEventService</string>
 			<key>IOKitDebug</key>
@@ -41,8 +45,12 @@
 		</dict>
 		<key>0b05_1837</key>
 		<dict>
+			<key>BacklightAutoTurnOff</key>
+			<integer>1</integer>
 			<key>CFBundleIdentifier</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>FixCapsLockLED</key>
+			<integer>1</integer>
 			<key>IOClass</key>
 			<string>AppleUserHIDEventService</string>
 			<key>IOKitDebug</key>
@@ -60,8 +68,12 @@
 		</dict>
 		<key>0b05_1854</key>
 		<dict>
+			<key>BacklightAutoTurnOff</key>
+			<integer>1</integer>
 			<key>CFBundleIdentifier</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>FixCapsLockLED</key>
+			<integer>1</integer>
 			<key>IOClass</key>
 			<string>AppleUserHIDEventService</string>
 			<key>IOKitDebug</key>
@@ -79,8 +91,12 @@
 		</dict>
 		<key>0b05_1866</key>
 		<dict>
+			<key>BacklightAutoTurnOff</key>
+			<integer>0</integer>
 			<key>CFBundleIdentifier</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>FixCapsLockLED</key>
+			<integer>0</integer>
 			<key>IOClass</key>
 			<string>AppleUserHIDEventService</string>
 			<key>IOKitDebug</key>
@@ -98,8 +114,12 @@
 		</dict>
 		<key>0b05_1869</key>
 		<dict>
+			<key>BacklightAutoTurnOff</key>
+			<integer>1</integer>
 			<key>CFBundleIdentifier</key>
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>FixCapsLockLED</key>
+			<integer>1</integer>
 			<key>IOClass</key>
 			<string>AppleUserHIDEventService</string>
 			<key>IOKitDebug</key>

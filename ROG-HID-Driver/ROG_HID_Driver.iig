@@ -15,6 +15,7 @@
 #define KBD_FEATURE_REPORT_SIZE 16
 #define LUX_FADE_OUT_DELAY STOMS(5 * 60)    /* 5 mins */
 #define SUPPORT_KEYBOARD_BACKLIGHT BIT(0)
+#define kBooleanTrue 0x01
 
 #define LOG_PREFIX "ROG-HID - "
 #define OSLOG(...)                                          \
@@ -65,6 +66,7 @@ public:
     
 private:
     virtual void parseKeyboardElementsHook(OSArray* elements);
+    virtual void parseInfoPlist();
     virtual void setKbdLux(kLuxEvent luxEvent);
     virtual void initLuxQueue();
     virtual void loadKbdLuxMonitor();

@@ -23,6 +23,9 @@ struct ROG_HID_Driver_IVars
     OSArray* customKeyboardElements         { nullptr };
     IODispatchQueue* luxQueue               { nullptr };
     uint8_t kbdFunction                     { 0 };
+    bool fixCapsLockLED                     { false };
+    bool bkltAutoTurnOff                    { false };
+    
     static uint64_t lastEventDispatchTime;
     static uint8_t kbdLux;
     static bool luxIsFadedOut;
@@ -53,6 +56,8 @@ bool ROG_HID_Driver::init()
     if (ivars == nullptr)
         return false;
     
+    ivars->fixCapsLockLED = false;
+    ivars->bkltAutoTurnOff = false;
     _last_dispatch_time = 0;
     
     return true;
@@ -90,6 +95,9 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     
     // Read the keyboard functions
     asusKbdGetFunctions();
+    
+    // Parse Info.plist
+    parseInfoPlist();
     
     // Reflect the intital value on lux
     DBGLOG("Trying to set initial kbd lux to: 0x%x", _current_lux);
@@ -255,7 +263,7 @@ kern_return_t ROG_HID_Driver::dispatchKeyboardEvent(uint64_t timeStamp, uint32_t
     }
     
     // Fix erratic caps lock key
-    if (usage == kHIDUsage_KeyboardCapsLock)
+    if (usage == kHIDUsage_KeyboardCapsLock && ivars->fixCapsLockLED)
         IOSleep(80);
     
     // Update the last dispatch time to the current mach_time
@@ -339,7 +347,13 @@ void IMPL(ROG_HID_Driver, loadKbdLuxMonitor)
 void IMPL(ROG_HID_Driver, initLuxQueue)
 {
     if (!(SUPPORT_KEYBOARD_BACKLIGHT & _kbd_function)) {
-        DBGLOG("Keyboard baclikght is not supported on this device, abort lux queue init");
+        DBGLOG("Keyboard backlight is not supported on this device, abort lux queue init");
+        return;
+    }
+    
+    if (!ivars->bkltAutoTurnOff)
+    {
+        DBGLOG("Backlight auto turn off is disabled via Info.plist");
         return;
     }
     
@@ -393,6 +407,28 @@ exit:
     OSSafeReleaseNULL(deviceProps);
 }
 
+void IMPL(ROG_HID_Driver, parseInfoPlist)
+{
+    DBGLOG("Parse custom Info.plist properties");
+    OSContainer* propContainer;
+    
+    SearchProperty("BacklightAutoTurnOff", "IOService", kIOServiceSearchPropertyParents, &propContainer);
+    ivars->fixCapsLockLED = OSDynamicCast(OSNumber, propContainer)->unsigned8BitValue() == kBooleanTrue;
+    DBGLOG("Fix caps lock led: %s", ivars->fixCapsLockLED ? "True" : "False");
+
+    propContainer = nullptr;
+    SearchProperty("BacklightAutoTurnOff", "IOService", kIOServiceSearchPropertyParents, &propContainer);
+    if (!propContainer)
+        goto exit;
+
+    ivars->bkltAutoTurnOff = OSDynamicCast(OSNumber, propContainer)->unsigned8BitValue() == kBooleanTrue;
+    DBGLOG("Backlight auto turn off: %s", ivars->bkltAutoTurnOff ? "True" : "False");
+
+exit:
+    OSSafeReleaseNULL(propContainer);
+    DBGLOG("Done parsing custom Info.plist properties");
+}
+
 kern_return_t IMPL(ROG_HID_Driver, Stop)
 {
     DBGLOG("Stop");
@@ -440,7 +476,7 @@ void IMPL(ROG_HID_Driver, asusKbdInit)
 void IMPL(ROG_HID_Driver, asusKbdBacklightSet)
 {
     if (!(SUPPORT_KEYBOARD_BACKLIGHT & _kbd_function)) {
-        DBGLOG("Setting keyboard baclikght is not supported on this device");
+        DBGLOG("Setting keyboard backlight is not supported on this device");
         return;
     }
     
