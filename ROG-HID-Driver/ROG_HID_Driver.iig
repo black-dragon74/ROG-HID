@@ -66,6 +66,7 @@ public:
 private:
     virtual void parseKeyboardElementsHook(OSArray* elements);
     virtual void setKbdLux(kLuxEvent luxEvent);
+    virtual void initLuxQueue();
     virtual void loadKbdLuxMonitor();
     virtual void fadeInLux();
     virtual void fadeOutLux();

@@ -78,16 +78,6 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     }
     
     _hid_interface = interface;
-    
-    ret = IODispatchQueue::Create("lux_dispatch_queue", 0, 0, &_lux_queue);
-    if (ret != kIOReturnSuccess)
-    {
-        OSLOG("Failed to create lux dispatch queue");
-        return kIOReturnError;
-    }
-    
-    // Load the keyboard backlight inactivity monitor
-    loadKbdLuxMonitor();
 
     OSArray *elements = _hid_interface->getElements();
     elements->retain();
@@ -102,12 +92,15 @@ kern_return_t IMPL(ROG_HID_Driver, Start)
     asusKbdGetFunctions();
     
     // Reflect the intital value on lux
-    DBGLOG("Trying to set initial kbd lux to 0x%x", _current_lux);
+    DBGLOG("Trying to set initial kbd lux to: 0x%x", _current_lux);
     asusKbdBacklightSet(_current_lux);
 
     // And register ourselves with the system
     DBGLOG("Register service");
     RegisterService();
+    
+    // Lastly, init the lux queue
+    initLuxQueue();
     
     return ret;
 }
@@ -324,7 +317,7 @@ void IMPL(ROG_HID_Driver, loadKbdLuxMonitor)
     }
     
     // Otherwise, init the hook
-    DBGLOG("Lux queue initialized successfully");
+    DBGLOG("Lux queue loaded successfully");
     _last_dispatch_time  = mach_absolute_time();
     _lux_queue->DispatchAsync(^{
         do {
@@ -341,6 +334,58 @@ void IMPL(ROG_HID_Driver, loadKbdLuxMonitor)
             IOSleep(STOMS(1));  /* Poll every second */
         } while (true);
     });
+}
+
+void IMPL(ROG_HID_Driver, initLuxQueue)
+{
+    OSDictionary* deviceProps   { nullptr };
+    OSObject* usagePageProp     { nullptr };
+    OSNumber* kbdUsagePage      { nullptr };
+    bool luxQueueSupported      { false };
+    
+    // Copy device primary properties
+    _hid_interface->CopyProperties(&deviceProps);
+    if (!deviceProps)
+        goto exit;
+    
+    // Read the primary usage page
+    usagePageProp = deviceProps->getObject("PrimaryUsagePage");
+    if (!usagePageProp)
+    {
+        DBGLOG("PrimaryUsagePage key does not exist for this device");
+        goto exit;
+    }
+    
+    // PrimaryUsagePage is a 16bit number in native byte order
+    kbdUsagePage = OSDynamicCast(OSNumber, usagePageProp);
+    if (!kbdUsagePage)
+    {
+        DBGLOG("Dynamic cast to OSNumber failed.");
+        goto exit;
+    }
+    
+    // Create queue only if vendor is anything but GD
+    luxQueueSupported = kbdUsagePage->unsigned16BitValue() != kHIDPage_GenericDesktop;
+    
+    if (luxQueueSupported)
+    {
+        DBGLOG("Creating lux queue for Asus usagePage: 0x%X", kbdUsagePage->unsigned16BitValue());
+        if (IODispatchQueue::Create("lux_dispatch_queue", 0, 0, &_lux_queue) != kIOReturnSuccess)
+        {
+            OSLOG("Failed to create lux queue");
+            goto exit;
+        }
+        
+        DBGLOG("Backlight auto turn off is supported, lux queue created successfully");
+        loadKbdLuxMonitor();
+    }
+    else
+    {
+        DBGLOG("Skipping lux queue for non Asus usagePage: 0x%X", kbdUsagePage->unsigned16BitValue());
+    }
+    
+exit:
+    OSSafeReleaseNULL(deviceProps);
 }
 
 kern_return_t IMPL(ROG_HID_Driver, Stop)
@@ -439,7 +484,7 @@ void IMPL(ROG_HID_Driver, asusKbdGetFunctions)
     }
     
     _kbd_function = readBuffer[6];
-    DBGLOG("Keyboard feature report is %02x", _kbd_function);
+    DBGLOG("Keyboard feature report is: 0x%.2X", _kbd_function);
     
 exit:
     report->release();
