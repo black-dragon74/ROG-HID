@@ -23,18 +23,12 @@ struct ROG_HID_Driver_IVars
     OSArray* customKeyboardElements         { nullptr };
     IODispatchQueue* luxQueue               { nullptr };
     uint8_t kbdFunction                     { 0 };
+    uint8_t kbdLux                          { 0 };
+    uint64_t lastEventDispatchTime          { 0 };
     bool fixCapsLockLED                     { false };
     bool bkltAutoTurnOff                    { false };
-    
-    static uint64_t lastEventDispatchTime;
-    static uint8_t kbdLux;
-    static bool luxIsFadedOut;
+    bool luxIsFadedOut                      { false };
 };
-
-// Out of line initialization
-uint64_t ROG_HID_Driver_IVars::lastEventDispatchTime = 0;
-uint8_t ROG_HID_Driver_IVars::kbdLux = 3;
-bool ROG_HID_Driver_IVars::luxIsFadedOut = false;
 
 #define _hid_interface              ivars->hid_interface
 #define _custom_keyboard_elements   ivars->customKeyboardElements
@@ -59,6 +53,8 @@ bool ROG_HID_Driver::init()
     ivars->fixCapsLockLED = false;
     ivars->bkltAutoTurnOff = false;
     _last_dispatch_time = 0;
+    _current_lux = 3;
+    _lux_is_faded_out = false;
     
     return true;
 }
