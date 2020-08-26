@@ -408,7 +408,7 @@ void IMPL(ROG_HID_Driver, parseInfoPlist)
     DBGLOG("Parse custom Info.plist properties");
     OSContainer* propContainer;
     
-    SearchProperty("BacklightAutoTurnOff", "IOService", kIOServiceSearchPropertyParents, &propContainer);
+    SearchProperty("FixCapsLockLED", "IOService", kIOServiceSearchPropertyParents, &propContainer);
     if (!propContainer)
         goto exit;
     
