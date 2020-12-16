@@ -373,7 +373,7 @@ void IMPL(ROG_HID_Driver, initLuxQueue)
     
     // PrimaryUsagePage is a 16bit number in native byte order
     kbdUsagePage = OSDynamicCast(OSNumber, usagePageProp);
-    if (!kbdUsagePage)
+    if (kbdUsagePage == nullptr)
     {
         DBGLOG("Dynamic cast to OSNumber failed.");
         goto exit;
@@ -406,21 +406,29 @@ exit:
 void IMPL(ROG_HID_Driver, parseInfoPlist)
 {
     DBGLOG("Parse custom Info.plist properties");
-    OSContainer* propContainer;
+    OSContainer* propContainer{nullptr};
+    OSNumber* containerVal{nullptr};
     
     SearchProperty("FixCapsLockLED", "IOService", kIOServiceSearchPropertyParents, &propContainer);
     if (!propContainer)
         goto exit;
     
-    ivars->fixCapsLockLED = OSDynamicCast(OSNumber, propContainer)->unsigned8BitValue() == kBooleanTrue;
+    containerVal = OSDynamicCast(OSNumber, propContainer);
+    if (containerVal == nullptr)
+        goto exit;
+    
+    ivars->fixCapsLockLED = containerVal->unsigned8BitValue() == kBooleanTrue;
     DBGLOG("Fix caps lock led: %s", ivars->fixCapsLockLED ? "True" : "False");
 
-    propContainer = nullptr;
     SearchProperty("BacklightAutoTurnOff", "IOService", kIOServiceSearchPropertyParents, &propContainer);
     if (!propContainer)
         goto exit;
 
-    ivars->bkltAutoTurnOff = OSDynamicCast(OSNumber, propContainer)->unsigned8BitValue() == kBooleanTrue;
+    containerVal = OSDynamicCast(OSNumber, propContainer);
+    if (containerVal == nullptr)
+        goto exit;
+    
+    ivars->bkltAutoTurnOff = containerVal->unsigned8BitValue() == kBooleanTrue;
     DBGLOG("Backlight auto turn off: %s", ivars->bkltAutoTurnOff ? "True" : "False");
 
 exit:
