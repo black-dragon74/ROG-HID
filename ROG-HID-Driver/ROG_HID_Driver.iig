@@ -9,6 +9,8 @@
 #ifndef ROG_HID_Driver_h
 #define ROG_HID_Driver_h
 
+#include <os/log.h>
+
 #define BIT(nr) (1UL << (nr))
 #define STOMS(x) (x * 1000)
 #define KBD_FEATURE_REPORT_ID 0x5a
@@ -63,6 +65,8 @@ public:
                                                 uint32_t value,
                                                 IOOptionBits options,
                                                 bool repeat) override;
+    virtual kern_return_t NewUserClient(uint32_t type,
+                                        IOUserClient** userClient) override;
     
 private:
     virtual void parseKeyboardElementsHook(OSArray* elements);

@@ -6,8 +6,6 @@
 //  Copyright © 2020 Nick. All rights reserved.
 //
 
-#include <os/log.h>
-
 #include <HIDDriverKit/HIDDriverKit.h>
 
 #include "ROG_HID_Driver.h"
@@ -538,4 +536,28 @@ exit:
     report->release();
     data->release();
     return;
+}
+
+kern_return_t IMPL(ROG_HID_Driver, NewUserClient) {
+    IOService *client {nullptr};
+    
+    auto ret = Create(this, "UserClientProperties", &client);
+    if (ret != kIOReturnSuccess) {
+        DBGLOG("Newuserclient create failed");
+        
+        return ret;
+    }
+    
+    DBGLOG("Created user client successfully");
+    
+    *userClient = OSDynamicCast(IOUserClient, client);
+    
+    if (!*userClient) {
+        DBGLOG("Dynamic cast failed");
+        client->release();
+        
+        return kIOReturnError;
+    }
+    
+    return kIOReturnSuccess;
 }

@@ -20,6 +20,8 @@
 		0118C9AA24C6121500C1C663 /* ROG_HID_Driver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0118C9A924C6121500C1C663 /* ROG_HID_Driver.cpp */; };
 		0118C9AC24C6121500C1C663 /* ROG_HID_Driver.iig in Sources */ = {isa = PBXBuildFile; fileRef = 0118C9AB24C6121500C1C663 /* ROG_HID_Driver.iig */; };
 		0118C9B124C6121500C1C663 /* com.black-dragon74.ROG-HID-Driver.dext in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 0118C9A424C6121500C1C663 /* com.black-dragon74.ROG-HID-Driver.dext */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		012617D625DBB8F100B563E0 /* ROGHIDUserClient.iig in Sources */ = {isa = PBXBuildFile; fileRef = 012617D525DBB8F100B563E0 /* ROGHIDUserClient.iig */; };
+		012617DA25DBB90000B563E0 /* ROGHIDUserClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 012617D925DBB90000B563E0 /* ROGHIDUserClient.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		0118C9AB24C6121500C1C663 /* ROG_HID_Driver.iig */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.iig; path = ROG_HID_Driver.iig; sourceTree = "<group>"; };
 		0118C9AD24C6121500C1C663 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0118C9AE24C6121500C1C663 /* ROG_HID_Driver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ROG_HID_Driver.entitlements; sourceTree = "<group>"; };
+		012617D525DBB8F100B563E0 /* ROGHIDUserClient.iig */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.iig; path = ROGHIDUserClient.iig; sourceTree = "<group>"; };
+		012617D925DBB90000B563E0 /* ROGHIDUserClient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ROGHIDUserClient.cpp; sourceTree = "<group>"; };
 		0176196324C77846007D4278 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +147,7 @@
 		0118C9A824C6121500C1C663 /* ROG-HID-Driver */ = {
 			isa = PBXGroup;
 			children = (
+				012617D425DBB8A100B563E0 /* ROGHIDUserClient */,
 				0118C9A924C6121500C1C663 /* ROG_HID_Driver.cpp */,
 				01056BCF24C614FE0087FD10 /* IOBufferMemoryDescriptorUtility.h */,
 				0118C9AB24C6121500C1C663 /* ROG_HID_Driver.iig */,
@@ -151,6 +156,15 @@
 				0118C9AE24C6121500C1C663 /* ROG_HID_Driver.entitlements */,
 			);
 			path = "ROG-HID-Driver";
+			sourceTree = "<group>";
+		};
+		012617D425DBB8A100B563E0 /* ROGHIDUserClient */ = {
+			isa = PBXGroup;
+			children = (
+				012617D525DBB8F100B563E0 /* ROGHIDUserClient.iig */,
+				012617D925DBB90000B563E0 /* ROGHIDUserClient.cpp */,
+			);
+			path = ROGHIDUserClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,7 +291,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				012617DA25DBB90000B563E0 /* ROGHIDUserClient.cpp in Sources */,
 				0118C9AC24C6121500C1C663 /* ROG_HID_Driver.iig in Sources */,
+				012617D625DBB8F100B563E0 /* ROGHIDUserClient.iig in Sources */,
 				0118C9AA24C6121500C1C663 /* ROG_HID_Driver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

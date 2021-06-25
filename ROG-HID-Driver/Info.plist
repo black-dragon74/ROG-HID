@@ -114,6 +114,13 @@
 		</dict>
 		<key>0b05_1869</key>
 		<dict>
+			<key>UserClientProperties</key>
+			<dict>
+				<key>IOClass</key>
+				<string>IOUserUserClient</string>
+				<key>IOUserClass</key>
+				<string>ROGHIDUserClient</string>
+			</dict>
 			<key>BacklightAutoTurnOff</key>
 			<integer>1</integer>
 			<key>CFBundleIdentifier</key>
