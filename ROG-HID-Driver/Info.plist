@@ -142,6 +142,29 @@
 			<key>VendorID</key>
 			<integer>2821</integer>
 		</dict>
+		<key>0b05_19b6</key>
+		<dict>
+			<key>BacklightAutoTurnOff</key>
+			<integer>1</integer>
+			<key>CFBundleIdentifier</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>FixCapsLockLED</key>
+			<integer>1</integer>
+			<key>IOClass</key>
+			<string>AppleUserHIDEventService</string>
+			<key>IOKitDebug</key>
+			<integer>16384</integer>
+			<key>IOProviderClass</key>
+			<string>IOHIDInterface</string>
+			<key>IOUserClass</key>
+			<string>ROG_HID_Driver</string>
+			<key>IOUserServerName</key>
+			<string>com.black-dragon74.ROG-HID-Driver</string>
+			<key>ProductID</key>
+			<integer>6582</integer>
+			<key>VendorID</key>
+			<integer>2821</integer>
+		</dict>
 	</dict>
 	<key>OSBundleUsageDescription</key>
 	<string>HID Event Driver for ROG HID Keyboards</string>
