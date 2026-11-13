@@ -124,6 +124,8 @@ void IMPL(ROG_HID_Driver, parseKeyboardElementsHook)
         usage = element->getUsage();
         usagePage = element->getUsagePage();
         bool store = false;
+        
+        if(element->getReportID() != 0x5A) continue;
 
         switch (usagePage)
         {
@@ -176,6 +178,11 @@ void ROG_HID_Driver::handleReport(uint64_t timestamp, uint8_t *report, uint32_t 
 
 void ROG_HID_Driver::handleKeyboardReport(uint64_t timestamp, uint32_t reportID)
 {
+    if(reportID != 0x5A){
+        super::handleKeyboardReport(timestamp, reportID);
+        return;
+    }
+    
     for (unsigned int i = 0; i < _custom_keyboard_elements->getCount(); i++)
     {
         IOHIDElement* element { nullptr };
